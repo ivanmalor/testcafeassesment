@@ -5,6 +5,7 @@
   "main": "test1.js",
   "dependencies": {
     "isomorphic-unfetch": "^3.1.0",
+    "lodash": "^4.17.21",
     "testcafe": "^1.14.2"
   },
   "devDependencies": {},
