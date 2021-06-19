@@ -1,0 +1,24 @@
+{
+  "name": "testcafeassesment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test1.js",
+  "dependencies": {
+    "isomorphic-unfetch": "^3.1.0",
+    "testcafe": "^1.14.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanmalor/testcafeassesment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivanmalor/testcafeassesment/issues"
+  },
+  "homepage": "https://github.com/ivanmalor/testcafeassesment#readme"
+}
