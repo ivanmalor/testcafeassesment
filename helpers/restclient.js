@@ -1,6 +1,6 @@
 const fetch = require("isomorphic-unfetch");
 
-export class RestClient {
+class RestClient {
     constructor() {
         this.basePath = 'http://localhost:3000'
     }
@@ -30,3 +30,5 @@ export class RestClient {
         return this.request(url, config);
     }
 }
+
+export default new RestClient(); 
