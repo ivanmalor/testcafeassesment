@@ -10,8 +10,8 @@ fixture`List of Devices`
         _.map(devices, data => {
             data.hdd_capacity =  parseInt(data.hdd_capacity)
         });
-        const sortedDevices = _.sortBy(devices, 'hdd_capacity', 'asc');
-        ctx.devices = sortedDevices;
+        const devicesSortedByCapacity = _.sortBy(devices, 'hdd_capacity', 'asc');
+        ctx.devices = devicesSortedByCapacity;
     });
 
 test('Test1 - List of devices', async t => {
@@ -30,7 +30,6 @@ test('Test1 - List of devices', async t => {
         let removeDeviceButtonExists = device.find(page.removeDeviceButton).exists;
 
         await t
-            .expect(numberOfDevices).eql(10)
             .expect(deviceName.textContent).eql(expectedDevices[i].system_name)
             .expect(deviceType.textContent).eql(expectedDevices[i].type)
             .expect(deviceCapacity.textContent).eql(expectedDevices[i].hdd_capacity + ' GB')
