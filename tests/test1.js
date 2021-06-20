@@ -1,54 +1,33 @@
-import { RestClient } from '../helpers/restclient.js';
-import { Selector } from 'testcafe';
+import restClient from '../helpers/restclient';
+import page from '../helpers/page-model';
 
 const _ = require('lodash');
 
 fixture`List of Devices`
     .page('http:localhost:3001')
     .before(async ctx => {
-        const api = new RestClient();
-        const devices = await api.getDevices();
+        const devices = await restClient.getDevices();
         _.map(devices, data => {
             data.hdd_capacity =  parseInt(data.hdd_capacity)
         });
-        console.log(devices);
         const sortedDevices = _.sortBy(devices, 'hdd_capacity', 'asc');
-
         ctx.devices = sortedDevices;
     });
 
-test('Test1', async t => {
+test('Test1 - List of devices', async t => {
     const expectedDevices = t.fixtureCtx.devices;
 
-    const devices = Selector('div.list-devices').find('div.device-main-box');
-    const numberOfDevices = await devices.count;
+    const numberOfDevices = await page.devices.count;
 
     for (let i = 0; i < numberOfDevices; i++) {
-        console.log(`Device number ${i}`)
-        console.log('===================');
-        let device = devices.nth(i);
+        let device = page.devices.nth(i);
 
-        let deviceName = device
-            .child('div.device-info')
-            .child('span.device-name');
+        let deviceName = device.find(page.deviceName);
+        let deviceType = device.find(page.deviceType);
+        let deviceCapacity = device.find(page.deviceCapacity);
 
-        let deviceType = device
-            .child('div.device-info')
-            .child('span.device-type');
-
-        let deviceCapacity = device
-            .child('div.device-info')
-            .child('span.device-capacity');
-
-        let editDeviceButtonExists = device
-            .child('div.device-options')
-            .child('a.device-edit')
-            .exists;
-
-        let removeDeviceButtonExists = device
-            .child('div.device-options')
-            .child('button.device-remove')
-            .exists;
+        let editDeviceButtonExists = device.find(page.editDeviceButton).exists;
+        let removeDeviceButtonExists = device.find(page.removeDeviceButton).exists;
 
         await t
             .expect(numberOfDevices).eql(10)
