@@ -30,8 +30,11 @@ test('Test1 - List of devices', async t => {
         let removeDeviceButtonExists = device.find(page.removeDeviceButton).exists;
 
         await t
+            .expect(deviceName.visible).ok()
             .expect(deviceName.textContent).eql(expectedDevices[i].system_name)
+            .expect(deviceType.visible).ok()
             .expect(deviceType.textContent).eql(expectedDevices[i].type)
+            .expect(deviceCapacity.visible).ok()
             .expect(deviceCapacity.textContent).eql(expectedDevices[i].hdd_capacity + ' GB')
             .expect(editDeviceButtonExists).ok()
             .expect(removeDeviceButtonExists).ok();
