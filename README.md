@@ -14,7 +14,7 @@ git clone  https://github.com/ivanmalor/testcafeassesment.git
 cd testcafeassesment
 npm install
 ```
-- Build and run the automation suite
+- Runs the automation suite using TestCafe
 ```
 npm test
 ```
