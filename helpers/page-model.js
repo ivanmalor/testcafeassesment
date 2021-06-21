@@ -1,7 +1,7 @@
-import { Selector } from 'testcafe';
+import { ClientFunction, Selector, t } from 'testcafe';
 
 class Page {
-    constructor () {
+    constructor() {
         this.devices = Selector('div.list-devices').find('div.device-main-box');
         this.deviceName = 'div.device-info > span.device-name';
         this.deviceType = 'div.device-info > span.device-type';
@@ -9,5 +9,12 @@ class Page {
         this.editDeviceButton = 'div.device-options > a.device-edit';
         this.removeDeviceButton = 'div.device-options > button.device-remove';
     }
+
+    async refresh() {
+        await ClientFunction(() => {
+            document.location.reload();
+        })();
+    }
 }
-export default new Page(); 
+
+export default new Page();
