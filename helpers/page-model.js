@@ -1,4 +1,4 @@
-import { ClientFunction, Selector, t } from 'testcafe';
+import { ClientFunction, Selector } from 'testcafe';
 
 class Page {
     constructor() {

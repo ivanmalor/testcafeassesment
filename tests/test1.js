@@ -1,21 +1,16 @@
 import restClient from '../helpers/restclient';
 import page from '../helpers/page-model';
-
-const _ = require('lodash');
+import { sortByDeviceCapacity } from '../helpers/utils.js'
 
 fixture`List of Devices`
     .page('http:localhost:3001')
-    .before(async ctx => {
+    .beforeEach(async t => {
         const devices = await restClient.getDevices();
-        _.map(devices, data => {
-            data.hdd_capacity =  parseInt(data.hdd_capacity)
-        });
-        const devicesSortedByCapacity = _.sortBy(devices, 'hdd_capacity', 'asc');
-        ctx.devices = devicesSortedByCapacity;
-    });
+        t.ctx.devices = sortByDeviceCapacity(devices);
+    })
 
 test('Test1 - List of devices', async t => {
-    const expectedDevices = t.fixtureCtx.devices;
+    const expectedDevices = t.ctx.devices;
 
     const numberOfDevices = await page.devices.count;
 
