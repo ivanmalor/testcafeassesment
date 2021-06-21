@@ -1,18 +1,18 @@
 import { ClientFunction, Selector } from 'testcafe';
 
 //CSS Selectors
-const DevicesCss = 'div.list-devices > div.device-main-box';
+const devicesCss = 'div.list-devices > div.device-main-box';
 const deviceInfoCss = 'div.device-info';
 const deviceOptionsCss = 'div.device-options';
 
 class Page {
     constructor() {
-        this.devices = Selector(DevicesCss);
-        this.deviceName = Selector(DevicesCss).child(deviceInfoCss).child('span.device-name')
-        this.deviceType = Selector(DevicesCss).child(deviceInfoCss).child('span.device-type');
-        this.deviceCapacity = Selector(DevicesCss).child(deviceInfoCss).child('span.device-capacity');
-        this.editDeviceBtn = Selector(DevicesCss).child(deviceOptionsCss).child('a.device-edit');
-        this.removeDeviceBtn = Selector(DevicesCss).child(deviceOptionsCss).child('button.device-remove');
+        this.devices = Selector(devicesCss);
+        this.deviceName = Selector(devicesCss).child(deviceInfoCss).child('span.device-name')
+        this.deviceType = Selector(devicesCss).child(deviceInfoCss).child('span.device-type');
+        this.deviceCapacity = Selector(devicesCss).child(deviceInfoCss).child('span.device-capacity');
+        this.editDeviceBtn = Selector(devicesCss).child(deviceOptionsCss).child('a.device-edit');
+        this.removeDeviceBtn = Selector(devicesCss).child(deviceOptionsCss).child('button.device-remove');
     }
 
     async isDeviceInfoVisible(number) {
