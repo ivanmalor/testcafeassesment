@@ -17,9 +17,10 @@ class Page {
 
     async isDeviceInfoVisible(number) {
         return await this.deviceName.nth(number).visible
-            || this.deviceType.nth(number).visible
-            || this.deviceCapacity.nth(number).visible;
+            && this.deviceType.nth(number).visible
+            && this.deviceCapacity.nth(number).visible;
     }
+    
     async getDeviceName(number) {
         return await this.deviceName.nth(number).textContent
     }
@@ -32,8 +33,12 @@ class Page {
         return await this.deviceCapacity.nth(number).textContent
     }
 
-    async deviceButtonsExists(number) {
-        return await this.editDeviceBtn.nth(number).exists || this.removeDeviceBtn.nth(number).exists
+    async deviceButtonsExist(number) {
+        return await this.editDeviceBtn.nth(number).exists && this.removeDeviceBtn.nth(number).exists;
+    }
+
+    async areDeviceButtonsVisible(number) {
+        return await this.editDeviceBtn.nth(number).visible && this.removeDeviceBtn.nth(number).visible;
     }
 
     async refresh() {

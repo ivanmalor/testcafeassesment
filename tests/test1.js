@@ -19,6 +19,7 @@ test('Test1 - List of devices', async t => {
             .expect(await page.getDeviceName(i)).eql(expectedDevices[i].system_name)
             .expect(await page.getDeviceType(i)).eql(expectedDevices[i].type)
             .expect(await page.getDeviceCapacity(i)).eql(expectedDevices[i].hdd_capacity + ' GB')
-            .expect(page.deviceButtonsExists).ok();
+            .expect(await page.deviceButtonsExist(i)).ok()
+            .expect(await page.areDeviceButtonsVisible(i)).ok();
     }
 });
