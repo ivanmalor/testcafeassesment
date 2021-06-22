@@ -1,22 +1,39 @@
 import page from '../helpers/page-model';
-import addDevicePage from '../helpers/add-device-page-model';
+import deviceFormPage from '../helpers/device-form-model';
+import restClient from '../helpers/restclient';
+import { getIndexOfDevice, sortByDeviceCapacity } from '../helpers/utils.js'
+
+const faker = require('faker');
 
 fixture`List of Devices`
     .page('http:localhost:3001')
 
-    test('Test2 - Create devices', async t => {
+test('Test2 - Create devices', async t => {
+    const systemName = 'Test-' + faker.random.alphaNumeric(8);
+    const hddCapacity = '10';
+    const deviceType = 'MAC';
 
-        await t
-        .click(page.addDeviceBtn)
+    await t.click(page.addDeviceBtn)
 
-        let getLocation = await page.getLocation();
-        await t.expect(getLocation()).contains('/devices/add');
+    let getLocation = await page.getLocation();
+    
+    await t
+        .expect(getLocation()).contains('/devices/add')
+        .expect(deviceFormPage.title.textContent).eql('NEW DEVICE');
+        
+    await deviceFormPage.enterSystemName(systemName);
+    await deviceFormPage.enterHddCapacity(hddCapacity);
+    await deviceFormPage.selectDeviceType(deviceType);
+    await deviceFormPage.submitNewDevice();
 
-        await addDevicePage.enterSystemName('Test 1');
-        await addDevicePage.enterHddCapacity('10');
-        await addDevicePage.selectDeviceType('MAC');
-        await addDevicePage.submitNewDevice();
+    getLocation = await page.getLocation();
+    await t.expect(getLocation()).contains('http://localhost:3001/');
 
-        getLocation = await page.getLocation();
-        await t.expect(getLocation()).contains('http://localhost:3001/');
-    });
+    let devices = await restClient.getDevices();
+    let sortedDevices = sortByDeviceCapacity(devices);
+    let index = getIndexOfDevice(sortedDevices, systemName);
+
+    await t
+        .expect(await page.isDeviceInfoVisible(index)).ok()
+        .expect(await page.getDeviceName(index)).eql(sortedDevices[index].system_name);
+});

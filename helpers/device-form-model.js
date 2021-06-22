@@ -1,6 +1,6 @@
 import { Selector, t } from 'testcafe';
 
-class AddDevicePage {
+class DeviceFormPage {
     constructor() {
         this.title = Selector('div.device-form > h3');
         this.systemNameField = Selector('#system_name');
@@ -29,4 +29,4 @@ class AddDevicePage {
     }
 }
 
-export default new AddDevicePage();
+export default new DeviceFormPage();
