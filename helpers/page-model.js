@@ -8,7 +8,6 @@ const deviceOptionsCss = 'div.device-options';
 class Page {
     constructor() {
         this.addDeviceBtn = Selector('a.submitButton').withExactText('ADD DEVICE');
-
         this.devices = Selector(devicesCss);
         this.deviceName = Selector(devicesCss).child(deviceInfoCss).child('span.device-name')
         this.deviceType = Selector(devicesCss).child(deviceInfoCss).child('span.device-type');
