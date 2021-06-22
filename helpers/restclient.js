@@ -20,15 +20,33 @@ class RestClient {
         if (res.ok) {
             return await res.json();
         }
+        throw new Error(res);
     }
 
     getDevices() {
         let url = '/devices';
-        let config = {
+        let options = {
             method: 'GET'
         }
-        return this.request(url, config);
+        return this.request(url, options);
+    }
+
+    updateDevice(id, body) {
+        let url = `/devices/${id}`;
+        let options = {
+            method: 'PUT',
+            body: JSON.stringify(body)
+        }
+        return this.request(url, options)
+    }
+
+    deleteDevice(id) {
+        let url = `/devices/${id}`;
+        let options = {
+            method: 'DELETE'
+        }
+        return this.request(url, options);
     }
 }
 
-export default new RestClient(); 
+export default new RestClient();
