@@ -1,4 +1,4 @@
-import page from '../helpers/page-model';
+import page from '../page-models/page-model';
 import restClient from '../helpers/restclient';
 import { sortByDeviceCapacity } from '../helpers/utils.js'
 

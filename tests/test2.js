@@ -1,5 +1,5 @@
-import page from '../helpers/page-model';
-import deviceFormPage from '../helpers/device-form-model';
+import page from '../page-models/page-model';
+import deviceFormPage from '../page-models/device-form-model';
 import restClient from '../helpers/restclient';
 import { getIndexOfDevice, sortByDeviceCapacity } from '../helpers/utils.js'
 

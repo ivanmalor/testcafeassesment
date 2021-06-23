@@ -1,5 +1,5 @@
 import restClient from '../helpers/restclient';
-import page from '../helpers/page-model';
+import page from '../page-models/page-model';
 import { sortByDeviceCapacity } from '../helpers/utils.js'
 
 fixture`List of Devices`
